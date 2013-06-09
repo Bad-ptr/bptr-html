@@ -7,6 +7,7 @@
   (:export #:html-tag
            #:html
            #:deftag
+           #:deftags
            #:with-html-output
            #:with-html-vars))
 
@@ -74,7 +75,7 @@
 
 (defun newline ()
 
-  "return newline character"
+  "Write newline character"
 
   (when *html-human-readable*
     (write-char #\Newline *html-output-stream*)))
@@ -173,8 +174,11 @@
 
 (defun deftag (name &rest props)
   (setf (gethash (interpret-to-string name) *html-defined-tags*) props))
+(defun deftags (&rest tagdefs-list)
+  (loop :for td :in tagdefs-list
+     :do (apply #'deftag td)))
 (defun getdtag (name)
-  (gethash (interpret-to-string name) *html-defined-tags*))
+  (gethash (interpret-to-string name) *html-defined-tags* nil))
 
 (defun html-tag (props)
 

@@ -6,9 +6,12 @@ Generate html from list structures.
 Depends on [`bptr-plist`](https://github.com/Bad-ptr/bptr-plist).
 
 ## Example
+You can define tags with `bptr-html:deftag`. 'Defining a tag' means remembering it's parameters.  
+But you can supply another value for parameter when constructing tag and that value will be used inplace.  
+(here we define 'br tag to always use :xclose as t (empty keywords here means t) and in some place we use tag br with :xclose as nil).
 
 ```common-lisp
-(bphtml:deftag 'br :xclose)
+(bptr-html:deftag 'br :xclose)
 (with-output-to-string (str)
            (bptr-html:WITH-HTML-OUTPUT str
              (bptr-html:html
@@ -70,7 +73,7 @@ Note bug with escaped text:
 So if you wnat human-readably output for this you can try:
 
 ```common-lisp
-(bphtml:deftag 'br :xclose)
+(bptr-html:deftag 'br :xclose)
 (with-output-to-string (str)
            (bptr-html:WITH-HTML-OUTPUT str
              (bptr-html:html
